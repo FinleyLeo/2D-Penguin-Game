@@ -956,7 +956,40 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      background platforms_0: -6916507572420104804
+      background platforms_1: -6947617855054035417
+      background platforms_10: -9000790261724380221
+      background platforms_11: -8924891999294263413
+      background platforms_12: 4188650416821774669
+      background platforms_13: -7357377403821443182
+      background platforms_14: -1772974749895167747
+      background platforms_15: -6708546893625703545
+      background platforms_16: -6705172814890301445
+      background platforms_17: -7489270743184198441
+      background platforms_18: 4804028929913167945
+      background platforms_19: 2782557916502260588
+      background platforms_2: 3372964325312892659
+      background platforms_20: -2278121764194457335
+      background platforms_21: -952645181244898968
+      background platforms_22: -5770295313066480556
+      background platforms_23: -3806810727393003878
+      background platforms_24: -8951908835962927220
+      background platforms_25: -8145937746437553939
+      background platforms_26: -3116377714682948557
+      background platforms_27: -4166766134595653440
+      background platforms_28: -6350365820982070266
+      background platforms_29: 2774515496926581558
+      background platforms_3: 6779213638150407973
+      background platforms_30: 1186540630812832036
+      background platforms_31: -8474762944669235239
+      background platforms_32: 7848050478887194804
+      background platforms_4: 2273172376971396880
+      background platforms_5: 5579487396690220557
+      background platforms_6: 1566018156036240798
+      background platforms_7: -8705345414725932380
+      background platforms_8: -3191509830760900775
+      background platforms_9: -1107152623665447567
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
