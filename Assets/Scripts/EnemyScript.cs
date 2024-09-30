@@ -118,6 +118,6 @@ public class EnemyScript : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        anim.SetBool("walk", false);
+        anim.SetBool("Run", false);
     }
 }
