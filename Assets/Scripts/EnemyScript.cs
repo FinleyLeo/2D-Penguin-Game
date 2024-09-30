@@ -25,7 +25,6 @@ public class EnemyScript : MonoBehaviour
         player = GameObject.Find("Sprite");
         playerSr = player.GetComponent<SpriteRenderer>();
         playerScript = player.GetComponent<SpriteScript>();
-        sr.color = Color.blue;
 
         health = 3;
     }
@@ -59,14 +58,14 @@ public class EnemyScript : MonoBehaviour
 
         if (Mathf.Abs(rb.velocity.x) > 0)
         {
-            anim.SetBool("walk", true);
+            anim.SetBool("Run", true);
         }
     }
 
     void Damage()
     {
         playerScript.health--;
-        playerSr.color = Color.red;
+        anim.SetTrigger("Hit");
         StartCoroutine(AttackDuration());
         coolDown = 1f;
     }
@@ -99,9 +98,19 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("HitBox"))
+        {
+            health--;
+            sr.color = Color.red;
+            StartCoroutine(AttackDuration());
+        }
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && player != null)
         {
             EnemyMovement();
         }

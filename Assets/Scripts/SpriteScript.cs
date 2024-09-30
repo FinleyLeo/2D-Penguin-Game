@@ -12,25 +12,25 @@ public class SpriteScript : MonoBehaviour
     public float jumpForce = 20;
     private float maxSpeed = 30;
 
-
     public int coins;
     public int health;
 
     private bool isGrounded;
     private bool attacked;
-    private bool cam1Active, cam2Active;
+    private bool textFinished;
 
-    private Vector3 offset = new Vector3(0, 10, -10);
-
-    public GameObject camera1, camera2;
+    public GameObject cam;
     private GameObject enemy;
+
     public TextMeshProUGUI coinsText;
+    public GameObject gameOver;
 
     private EnemyScript enemyScript;
     private SpriteRenderer enemySr;
     private SpriteRenderer sr;
     private Rigidbody2D rb;
     public Animator animator;
+    private BoxCollider2D hitbox;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +41,9 @@ public class SpriteScript : MonoBehaviour
         enemy = GameObject.FindWithTag("Enemy");
         enemyScript = enemy.GetComponent<EnemyScript>();
         enemySr = enemy.GetComponent<SpriteRenderer>();
+        hitbox = transform.Find("HitBox").GetComponent<BoxCollider2D>();
+
+        gameOver.SetActive(false);
     }
 
     // Update is called once per frame
@@ -51,9 +54,11 @@ public class SpriteScript : MonoBehaviour
         Attack();
         CameraFollow();
 
-        if (health == 0)
+        if (health == 0 && !textFinished)
         {
             Destroy(gameObject);
+            gameOver.SetActive(true);
+            textFinished = true;
         }
     }
 
@@ -106,57 +111,24 @@ public class SpriteScript : MonoBehaviour
         if (Input.GetKeyDown("f") && isGrounded && coolDown <= 0)
         {
             animator.SetTrigger("Attack");
-            attacked = true;
-            coolDown = 0.5f;
+            Invoke("ActivateHitbox", 0.01f);
+            Invoke("DeactivateHitbox", 0.2f);
         }
     }
 
-    void Damage()
+    void ActivateHitbox()
     {
-        enemyScript.health--;
-        enemySr.color = Color.red;
-        StartCoroutine(AttackDuration());
-        attacked = false;
+        hitbox.gameObject.SetActive(true);
     }
 
-    IEnumerator AttackDuration()
+    void DeactivateHitbox()
     {
-        yield return new WaitForSeconds(0.25f);
-        enemySr.color = Color.blue;
+        hitbox.gameObject.SetActive(false);
     }
 
     void CameraFollow()
     {
-        if (transform.position.x > -2 && cam1Active)
-        {
-            camera1.transform.position = new Vector3(transform.position.x, camera1.transform.position.y, -10);
-        }
-
-        else if (transform.position.x > -2 && cam2Active)
-        {
-            camera2.transform.position = new Vector3(transform.position.x, camera2.transform.position.y, -10);
-        }
-
-        else
-        {
-            camera1.transform.position = new Vector3(-2, 10, -10);
-        }
-
-        if (transform.position.y > 20)
-        {
-            camera1.SetActive(false);
-            camera2.SetActive(true);
-            cam2Active = true;
-            cam1Active = false;
-        }
-
-        else if (transform.position.y < 20)
-        {
-            camera1.SetActive(true);
-            camera2.SetActive(false);
-            cam1Active = true;
-            cam2Active = false;
-        }
+        cam.transform.position = new Vector3(transform.position.x, transform.position.y + 5, -10);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -167,14 +139,6 @@ public class SpriteScript : MonoBehaviour
             animator.SetBool("Jumping", false);
             animator.SetBool("Falling", false);
             animator.SetBool("HitGround", true);
-        }
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy") && attacked == true)
-        {
-            Damage();
         }
     }
 
@@ -194,6 +158,14 @@ public class SpriteScript : MonoBehaviour
             Destroy(collision.gameObject);
             coins++;
             coinsText.text = coins.ToString();
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Rope"))
+        {
+            isGrounded = true;
         }
     }
 }
