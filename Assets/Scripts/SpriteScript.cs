@@ -8,15 +8,14 @@ using UnityEngine.SceneManagement;
 public class SpriteScript : MonoBehaviour
 {
 
-    private float speed = 8;
-    public float jumpForce = 20;
-    private float maxSpeed = 30;
+    private readonly float speed = 8;
+    private readonly float jumpForce = 20;
+    private readonly float maxSpeed = 30;
 
     public int coins;
     public int health;
 
     public bool isGrounded;
-    private bool textFinished;
 
     public GameObject cam;
     private GameObject enemy;
