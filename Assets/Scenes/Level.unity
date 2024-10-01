@@ -1965,7 +1965,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e11f82a9f34a4e547816e92586cac7c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coolDown: 0.5
   jumpForce: 150
   coins: 0
   health: 5
@@ -1974,6 +1973,7 @@ MonoBehaviour:
   coinsText: {fileID: 84547510}
   gameOver: {fileID: 748245365}
   animator: {fileID: 148990775}
+  hitBox: {fileID: 1870055856}
 --- !u!212 &148990771
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2143,6 +2143,7 @@ MonoBehaviour:
   enemy: {fileID: 5514173311924859195}
   hitBox: {fileID: 1870055857}
   attackRange: 2
+  coolDown: 0
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64
@@ -4954,7 +4955,7 @@ RectTransform:
   m_GameObject: {fileID: 461264567}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.07, y: 0.7, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1446397750}
@@ -13070,18 +13071,18 @@ RectTransform:
   m_GameObject: {fileID: 1446397749}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8, y: 0.2, z: 1}
+  m_LocalScale: {x: 8, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2061598208}
   - {fileID: 461264568}
+  - {fileID: 2061598208}
   m_Father: {fileID: 121781601}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 150, y: -50}
-  m_SizeDelta: {x: 20, y: 160}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 50, y: -50}
+  m_SizeDelta: {x: 20, y: 170}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1446397751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18722,7 +18723,7 @@ RectTransform:
   m_GameObject: {fileID: 2061598207}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.15, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1446397750}
@@ -18745,14 +18746,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 4610115622533671340, guid: 99eb19c94648e344fb473c29668bdf09, type: 3}
+  m_Sprite: {fileID: -8227546954408941770, guid: 6bf034204ac02e448b54ede7b9afb26d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

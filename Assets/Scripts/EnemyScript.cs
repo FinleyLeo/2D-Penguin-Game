@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
@@ -83,7 +82,9 @@ public class EnemyScript : MonoBehaviour
         anim.SetTrigger("Death");
 
         isDead = true;
-        Debug.Log("Enemy Died");
+        rb.simulated = false;
+        GetComponent<Collider2D>().enabled = false;
+        this.enabled = false;
     }
 
     IEnumerator AttackDuration()

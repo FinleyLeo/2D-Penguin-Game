@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Threading;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SpriteScript : MonoBehaviour
 {
 
     private float speed = 8;
-    public float coolDown = 0;
     public float jumpForce = 20;
     private float maxSpeed = 30;
 
@@ -31,6 +31,9 @@ public class SpriteScript : MonoBehaviour
     private Rigidbody2D rb;
     public Animator animator;
     private HelperScript helper;
+
+    public GameObject hitBox;
+    private float offset = 1.45f;
 
     // Start is called before the first frame update
     void Start()
@@ -69,12 +72,14 @@ public class SpriteScript : MonoBehaviour
         {
             rb.velocity = new Vector2(-1 * speed, rb.velocity.y);
             sr.flipX = true;
+            hitBox.transform.position = new Vector2(transform.position.x - offset, transform.position.y + 1.5f);
         }
 
         if (Input.GetKey("d") == true)
         {
             rb.velocity = new Vector2(1 * speed, rb.velocity.y);
             sr.flipX = false;
+            hitBox.transform.position = new Vector2(transform.position.x + offset, transform.position.y + 1.5f);
         }
 
         if (Mathf.Abs(rb.velocity.x) > 0.1)
@@ -118,8 +123,6 @@ public class SpriteScript : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-
-        coolDown = 1f;
 
         if (health <= 0)
         {

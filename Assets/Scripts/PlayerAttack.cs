@@ -12,7 +12,9 @@ public class PlayerAttack : MonoBehaviour
     private Animator enemyAnim;
 
     public Transform hitBox;
+
     public float attackRange = 0.5f;
+    public float coolDown = 0;
 
     public LayerMask enemyLayers;
 
@@ -29,7 +31,9 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && script.isGrounded && script.coolDown <= 0)
+        coolDown -= Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.F) && script.isGrounded && coolDown <= 0)
         {
             Attack();
         }
@@ -46,7 +50,7 @@ public class PlayerAttack : MonoBehaviour
             enemy.GetComponent<EnemyScript>().TakeDamage(attackDamage);
         }
 
-        script.coolDown = 0.25f;
+        coolDown = 0.25f;
     }
 
     private void OnDrawGizmosSelected()
