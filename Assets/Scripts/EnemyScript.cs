@@ -6,16 +6,23 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
+    private int maxHealth = 3;
     public int health;
+
     public float coolDown;
     public float speed = 10;
+
     private bool isGrounded;
+    private bool isDead;
+
     private GameObject player;
     private SpriteScript playerScript;
+    private SpriteRenderer playerSr;
+
     private Rigidbody2D rb;
     private SpriteRenderer sr;
-    private SpriteRenderer playerSr;
     private Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,48 +33,57 @@ public class EnemyScript : MonoBehaviour
         playerSr = player.GetComponent<SpriteRenderer>();
         playerScript = player.GetComponent<SpriteScript>();
 
-        health = 3;
+        health = maxHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (health == 0)
-        {
-            playerSr.color = Color.white;
-            Destroy(gameObject);
-        }
-
         coolDown -= Time.deltaTime;
     }
 
-    void EnemyMovement()
+    public void EnemyMovement()
     {
-        Vector2 direction = (player.transform.position - transform.position).normalized;
-        rb.velocity = new Vector2(direction.x * speed, rb.velocity.y);
-
-        if (direction.x > 0)
+        if (!isDead)
         {
-            sr.flipX = false;
-        }
+            if (player.transform.position.x > transform.position.x)
+            {
+                rb.velocity = new Vector2(1 * speed, rb.velocity.y);
+                sr.flipX = false;
+            }
 
-        else
-        {
-            sr.flipX = true;
-        }
+            else if (player.transform.position.x < transform.position.x)
+            {
+                rb.velocity = new Vector2(-1 * speed, rb.velocity.y);
+                sr.flipX = true;
+            }
 
-        if (Mathf.Abs(rb.velocity.x) > 0)
-        {
-            anim.SetBool("Run", true);
+            if (Mathf.Abs(rb.velocity.x) > 0)
+            {
+                anim.SetBool("Run", true);
+            }
         }
     }
 
-    void Damage()
+    public void TakeDamage(int damage)
     {
-        playerScript.health--;
-        anim.SetTrigger("Hit");
-        StartCoroutine(AttackDuration());
+        health -= damage;
+
         coolDown = 1f;
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        playerSr.color = Color.white;
+        anim.SetTrigger("Death");
+
+        isDead = true;
+        Debug.Log("Enemy Died");
     }
 
     IEnumerator AttackDuration()
@@ -81,7 +97,8 @@ public class EnemyScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && isGrounded && coolDown <= 0)
         {
             anim.SetTrigger("Attack");
-            Damage();
+            playerScript.TakeDamage(1);
+            coolDown = 1f;
         }
 
         else if (collision.gameObject.CompareTag("Ground"))
@@ -96,28 +113,5 @@ public class EnemyScript : MonoBehaviour
         {
             isGrounded = false;
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("HitBox"))
-        {
-            health--;
-            sr.color = Color.red;
-            StartCoroutine(AttackDuration());
-        }
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player") && player != null)
-        {
-            EnemyMovement();
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        anim.SetBool("Run", false);
     }
 }

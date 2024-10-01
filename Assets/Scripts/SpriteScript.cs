@@ -15,8 +15,7 @@ public class SpriteScript : MonoBehaviour
     public int coins;
     public int health;
 
-    private bool isGrounded;
-    private bool attacked;
+    public bool isGrounded;
     private bool textFinished;
 
     public GameObject cam;
@@ -27,10 +26,11 @@ public class SpriteScript : MonoBehaviour
 
     private EnemyScript enemyScript;
     private SpriteRenderer enemySr;
+
     private SpriteRenderer sr;
     private Rigidbody2D rb;
     public Animator animator;
-    private BoxCollider2D hitbox;
+    private HelperScript helper;
 
     // Start is called before the first frame update
     void Start()
@@ -41,7 +41,8 @@ public class SpriteScript : MonoBehaviour
         enemy = GameObject.FindWithTag("Enemy");
         enemyScript = enemy.GetComponent<EnemyScript>();
         enemySr = enemy.GetComponent<SpriteRenderer>();
-        hitbox = transform.Find("HitBox").GetComponent<BoxCollider2D>();
+
+        helper = gameObject.AddComponent<HelperScript>();
 
         gameOver.SetActive(false);
     }
@@ -51,14 +52,11 @@ public class SpriteScript : MonoBehaviour
     {
         Move();
         Jump();
-        Attack();
         CameraFollow();
 
-        if (health == 0 && !textFinished)
+        if (Input.GetKeyDown(KeyCode.H))
         {
-            Destroy(gameObject);
-            gameOver.SetActive(true);
-            textFinished = true;
+            helper.Hello();
         }
     }
 
@@ -104,31 +102,30 @@ public class SpriteScript : MonoBehaviour
         }
     }
 
-    void Attack()
+    void CameraFollow()
     {
-        coolDown -= Time.deltaTime;
-
-        if (Input.GetKeyDown("f") && isGrounded && coolDown <= 0)
+        if (transform.position.x > -10)
         {
-            animator.SetTrigger("Attack");
-            Invoke("ActivateHitbox", 0.01f);
-            Invoke("DeactivateHitbox", 0.2f);
+            cam.transform.position = new Vector3(transform.position.x, transform.position.y + 5, -10);
+        }
+
+        else if (transform.position.x < -10)
+        {
+            cam.transform.position = new Vector3(-10, transform.position.y + 5, -10);
         }
     }
 
-    void ActivateHitbox()
+    public void TakeDamage(int damage)
     {
-        hitbox.gameObject.SetActive(true);
-    }
+        health -= damage;
 
-    void DeactivateHitbox()
-    {
-        hitbox.gameObject.SetActive(false);
-    }
+        coolDown = 1f;
 
-    void CameraFollow()
-    {
-        cam.transform.position = new Vector3(transform.position.x, transform.position.y + 5, -10);
+        if (health <= 0)
+        {
+            gameOver.SetActive(true);
+            Destroy(gameObject);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
