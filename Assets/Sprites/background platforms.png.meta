@@ -144,7 +144,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -257,10 +257,10 @@ TextureImporter:
       name: background platforms_0
       rect:
         serializedVersion: 2
-        x: 64
-        y: 399
-        width: 303
-        height: 81
+        x: 65
+        y: 401
+        width: 301
+        height: 77
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -278,10 +278,10 @@ TextureImporter:
       name: background platforms_1
       rect:
         serializedVersion: 2
-        x: 412
-        y: 399
-        width: 156
-        height: 81
+        x: 413
+        y: 401
+        width: 154
+        height: 77
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -299,10 +299,10 @@ TextureImporter:
       name: background platforms_2
       rect:
         serializedVersion: 2
-        x: 213
-        y: 296
-        width: 80
-        height: 81
+        x: 216
+        y: 299
+        width: 74
+        height: 75
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -320,10 +320,10 @@ TextureImporter:
       name: background platforms_3
       rect:
         serializedVersion: 2
-        x: 299
-        y: 296
-        width: 80
-        height: 81
+        x: 302
+        y: 299
+        width: 74
+        height: 75
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -341,10 +341,10 @@ TextureImporter:
       name: background platforms_4
       rect:
         serializedVersion: 2
-        x: 383
-        y: 296
-        width: 81
-        height: 81
+        x: 386
+        y: 299
+        width: 75
+        height: 75
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -362,10 +362,10 @@ TextureImporter:
       name: background platforms_5
       rect:
         serializedVersion: 2
-        x: 468
-        y: 296
-        width: 80
-        height: 61
+        x: 470
+        y: 298
+        width: 76
+        height: 58
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -383,10 +383,10 @@ TextureImporter:
       name: background platforms_6
       rect:
         serializedVersion: 2
-        x: 569
-        y: 313
-        width: 49
-        height: 49
+        x: 570
+        y: 314
+        width: 47
+        height: 47
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -404,10 +404,10 @@ TextureImporter:
       name: background platforms_7
       rect:
         serializedVersion: 2
-        x: 629
-        y: 314
-        width: 40
-        height: 42
+        x: 630
+        y: 315
+        width: 38
+        height: 40
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -425,10 +425,10 @@ TextureImporter:
       name: background platforms_8
       rect:
         serializedVersion: 2
-        x: 683
-        y: 314
-        width: 39
-        height: 41
+        x: 684
+        y: 315
+        width: 37
+        height: 39
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -446,10 +446,10 @@ TextureImporter:
       name: background platforms_9
       rect:
         serializedVersion: 2
-        x: 731
-        y: 315
-        width: 33
-        height: 27
+        x: 732
+        y: 316
+        width: 31
+        height: 25
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -467,10 +467,10 @@ TextureImporter:
       name: background platforms_10
       rect:
         serializedVersion: 2
-        x: 764
-        y: 315
-        width: 33
-        height: 27
+        x: 765
+        y: 316
+        width: 31
+        height: 25
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -488,10 +488,10 @@ TextureImporter:
       name: background platforms_11
       rect:
         serializedVersion: 2
-        x: 820
-        y: 342
-        width: 56
-        height: 34
+        x: 821
+        y: 343
+        width: 54
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -509,10 +509,10 @@ TextureImporter:
       name: background platforms_12
       rect:
         serializedVersion: 2
-        x: 562
-        y: 119
-        width: 172
-        height: 184
+        x: 563
+        y: 120
+        width: 170
+        height: 182
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -530,10 +530,10 @@ TextureImporter:
       name: background platforms_13
       rect:
         serializedVersion: 2
-        x: 813
-        y: 299
-        width: 71
-        height: 28
+        x: 814
+        y: 300
+        width: 69
+        height: 26
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -551,10 +551,10 @@ TextureImporter:
       name: background platforms_14
       rect:
         serializedVersion: 2
-        x: 213
-        y: 212
-        width: 80
-        height: 80
+        x: 215
+        y: 215
+        width: 75
+        height: 74
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -573,9 +573,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 302
-        y: 214
-        width: 75
-        height: 76
+        y: 215
+        width: 74
+        height: 74
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -593,10 +593,10 @@ TextureImporter:
       name: background platforms_16
       rect:
         serializedVersion: 2
-        x: 383
-        y: 212
-        width: 81
-        height: 80
+        x: 384
+        y: 213
+        width: 79
+        height: 78
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -614,10 +614,10 @@ TextureImporter:
       name: background platforms_17
       rect:
         serializedVersion: 2
-        x: 468
-        y: 212
-        width: 80
-        height: 80
+        x: 471
+        y: 215
+        width: 74
+        height: 74
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -635,10 +635,10 @@ TextureImporter:
       name: background platforms_18
       rect:
         serializedVersion: 2
-        x: 735
-        y: 119
-        width: 172
-        height: 168
+        x: 736
+        y: 120
+        width: 170
+        height: 166
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -656,10 +656,10 @@ TextureImporter:
       name: background platforms_19
       rect:
         serializedVersion: 2
-        x: 129
-        y: 126
-        width: 80
-        height: 81
+        x: 132
+        y: 129
+        width: 74
+        height: 74
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -677,10 +677,10 @@ TextureImporter:
       name: background platforms_20
       rect:
         serializedVersion: 2
-        x: 213
-        y: 126
-        width: 80
-        height: 80
+        x: 215
+        y: 129
+        width: 75
+        height: 74
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -698,10 +698,10 @@ TextureImporter:
       name: background platforms_21
       rect:
         serializedVersion: 2
-        x: 299
-        y: 126
-        width: 80
-        height: 80
+        x: 302
+        y: 129
+        width: 74
+        height: 74
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -719,10 +719,10 @@ TextureImporter:
       name: background platforms_22
       rect:
         serializedVersion: 2
-        x: 383
-        y: 126
-        width: 81
-        height: 80
+        x: 386
+        y: 129
+        width: 75
+        height: 74
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -740,10 +740,10 @@ TextureImporter:
       name: background platforms_23
       rect:
         serializedVersion: 2
-        x: 468
-        y: 126
-        width: 80
-        height: 81
+        x: 469
+        y: 127
+        width: 78
+        height: 79
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -761,10 +761,10 @@ TextureImporter:
       name: background platforms_24
       rect:
         serializedVersion: 2
-        x: 129
-        y: 43
-        width: 80
-        height: 80
+        x: 130
+        y: 44
+        width: 78
+        height: 78
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -782,10 +782,10 @@ TextureImporter:
       name: background platforms_25
       rect:
         serializedVersion: 2
-        x: 213
-        y: 64
-        width: 80
-        height: 59
+        x: 214
+        y: 65
+        width: 78
+        height: 57
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -803,10 +803,10 @@ TextureImporter:
       name: background platforms_26
       rect:
         serializedVersion: 2
-        x: 299
-        y: 64
-        width: 80
-        height: 59
+        x: 300
+        y: 65
+        width: 78
+        height: 57
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -824,10 +824,10 @@ TextureImporter:
       name: background platforms_27
       rect:
         serializedVersion: 2
-        x: 383
-        y: 64
-        width: 81
-        height: 59
+        x: 384
+        y: 65
+        width: 79
+        height: 57
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -845,10 +845,10 @@ TextureImporter:
       name: background platforms_28
       rect:
         serializedVersion: 2
-        x: 468
-        y: 43
-        width: 80
-        height: 80
+        x: 469
+        y: 44
+        width: 78
+        height: 78
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -866,10 +866,10 @@ TextureImporter:
       name: background platforms_29
       rect:
         serializedVersion: 2
-        x: 595
-        y: 52
-        width: 83
-        height: 41
+        x: 596
+        y: 53
+        width: 81
+        height: 39
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -887,10 +887,10 @@ TextureImporter:
       name: background platforms_30
       rect:
         serializedVersion: 2
-        x: 683
-        y: 51
-        width: 82
-        height: 43
+        x: 684
+        y: 52
+        width: 80
+        height: 41
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -908,10 +908,10 @@ TextureImporter:
       name: background platforms_31
       rect:
         serializedVersion: 2
-        x: 786
-        y: 58
-        width: 46
-        height: 30
+        x: 787
+        y: 59
+        width: 44
+        height: 28
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -929,10 +929,10 @@ TextureImporter:
       name: background platforms_32
       rect:
         serializedVersion: 2
-        x: 841
-        y: 58
-        width: 46
-        height: 30
+        x: 842
+        y: 59
+        width: 44
+        height: 28
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

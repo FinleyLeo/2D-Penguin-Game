@@ -137,6 +137,11 @@ public class SpriteScript : MonoBehaviour
                 cam.transform.position = new Vector3(-10, 5.25f, -10);
             }
         }
+
+        if (transform.position.x > -10 && (transform.position.y + 5) < 5.25)
+        {
+            cam.transform.position = new Vector3(transform.position.x, 5.25f, -10);
+        }
     }
 
     public void TakeDamage(int damage)
@@ -192,6 +197,7 @@ public class SpriteScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Water"))
         {
             Instantiate(splash, transform.position, splash.transform.rotation);
+            isGrounded = true;
         }
     }
 
