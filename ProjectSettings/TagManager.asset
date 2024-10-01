@@ -10,6 +10,7 @@ TagManager:
   - Rope
   - TP point
   - HitBox
+  - Water
   layers:
   - Default
   - TransparentFX

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2786069536220477258}
   - component: {fileID: 596646193061850877}
+  - component: {fileID: 2264524581751443815}
   m_Layer: 0
   m_Name: PlayerLocator
   m_TagString: Untagged
@@ -68,6 +69,18 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 2
+--- !u!114 &2264524581751443815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 769111613115057870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03eae52424f818244aca771ccdeefd08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2361266269518397377
 GameObject:
   m_ObjectHideFlags: 0
@@ -82,6 +95,7 @@ GameObject:
   - component: {fileID: 5205770561355352124}
   - component: {fileID: 2750634271556110761}
   - component: {fileID: 6627507102331065779}
+  - component: {fileID: 3138602690095040048}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -147,7 +161,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 6197056623017412966, guid: 25e3c3e2a286eee48bba19e8d339e062, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.3066038, b: 0.3066038, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
@@ -267,3 +281,16 @@ MonoBehaviour:
   health: 3
   coolDown: 0
   speed: 6
+--- !u!114 &3138602690095040048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2361266269518397377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4625715372abbca4fa62a311d32b139b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOver: {fileID: 0}

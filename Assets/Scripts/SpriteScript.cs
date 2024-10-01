@@ -9,30 +9,32 @@ public class SpriteScript : MonoBehaviour
 {
 
     private readonly float speed = 8;
-    private readonly float jumpForce = 20;
+    private float jumpForce = 150;
     private readonly float maxSpeed = 30;
 
     public int coins;
     public int health;
 
     public bool isGrounded;
+    private bool setactive;
+
+    public GameObject coinPickup;
+    public GameObject splash;
 
     public GameObject cam;
-    private GameObject enemy;
 
     public TextMeshProUGUI coinsText;
     public GameObject gameOver;
-
-    private EnemyScript enemyScript;
-    private SpriteRenderer enemySr;
+    public GameObject controls;
 
     private SpriteRenderer sr;
     private Rigidbody2D rb;
-    public Animator animator;
     private HelperScript helper;
+    public Animator animator;
+    public AudioSource music;
 
     public GameObject hitBox;
-    private float offset = 1.45f;
+    private readonly float offset = 1.45f;
 
     // Start is called before the first frame update
     void Start()
@@ -40,13 +42,12 @@ public class SpriteScript : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        enemy = GameObject.FindWithTag("Enemy");
-        enemyScript = enemy.GetComponent<EnemyScript>();
-        enemySr = enemy.GetComponent<SpriteRenderer>();
 
         helper = gameObject.AddComponent<HelperScript>();
 
+        setactive = false;
         gameOver.SetActive(false);
+        controls.SetActive(false);
     }
 
     // Update is called once per frame
@@ -59,6 +60,17 @@ public class SpriteScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             helper.Hello();
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            music.enabled = !music.enabled;
+        }
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            setactive = !setactive;
+            controls.SetActive(setactive);
         }
     }
 
@@ -108,19 +120,30 @@ public class SpriteScript : MonoBehaviour
 
     void CameraFollow()
     {
-        if (transform.position.x > -10)
+        if (transform.position.x > -10 && (transform.position.y + 5) > 5.25)
         {
             cam.transform.position = new Vector3(transform.position.x, transform.position.y + 5, -10);
         }
 
-        else if (transform.position.x < -10)
+        if (transform.position.x < -10)
         {
-            cam.transform.position = new Vector3(-10, transform.position.y + 5, -10);
+            if ((transform.position.y + 5) > 5.25)
+            {
+                cam.transform.position = new Vector3(-10, transform.position.y + 5, -10);
+            }
+            
+            else if ((transform.position.y + 5) < 5.25)
+            {
+                cam.transform.position = new Vector3(-10, 5.25f, -10);
+            }
         }
     }
 
     public void TakeDamage(int damage)
     {
+        sr.color = Color.red;
+        StartCoroutine(AttackDuration());
+
         health -= damage;
 
         if (health <= 0)
@@ -128,6 +151,12 @@ public class SpriteScript : MonoBehaviour
             gameOver.SetActive(true);
             Destroy(gameObject);
         }
+    }
+
+    IEnumerator AttackDuration()
+    {
+        yield return new WaitForSeconds(0.25f);
+        sr.color = Color.white;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -155,8 +184,14 @@ public class SpriteScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Coin"))
         {
             Destroy(collision.gameObject);
+            Instantiate(coinPickup, collision.transform.position, coinPickup.transform.rotation);
             coins++;
             coinsText.text = coins.ToString();
+        }
+
+        if (collision.gameObject.CompareTag("Water"))
+        {
+            Instantiate(splash, transform.position, splash.transform.rotation);
         }
     }
 

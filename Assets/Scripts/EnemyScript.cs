@@ -64,11 +64,14 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
+    public void Attack()
+    {
+        playerScript.TakeDamage(1);
+    }
+
     public void TakeDamage(int damage)
     {
         health -= damage;
-
-        coolDown = 1f;
 
         if (health <= 0)
         {
@@ -87,19 +90,12 @@ public class EnemyScript : MonoBehaviour
         this.enabled = false;
     }
 
-    IEnumerator AttackDuration()
-    {
-        yield return new WaitForSeconds(0.25f);
-        playerSr.color = Color.white;
-    }
-
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player") && isGrounded && coolDown <= 0)
         {
             anim.SetTrigger("Attack");
-            playerScript.TakeDamage(1);
-            coolDown = 1f;
+            coolDown = 1.5f;
         }
 
         else if (collision.gameObject.CompareTag("Ground"))
