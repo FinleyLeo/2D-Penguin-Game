@@ -11,6 +11,7 @@ TagManager:
   - TP point
   - HitBox
   - Water
+  - Wall
   layers:
   - Default
   - TransparentFX

@@ -120,7 +120,7 @@ public class SpriteScript : MonoBehaviour
 
     void CameraFollow()
     {
-        if (transform.position.x > -10 && (transform.position.y + 5) > 5.25)
+        if (transform.position.x > -10 && (transform.position.y + 5) > 5.25 && transform.position.x < 150)
         {
             cam.transform.position = new Vector3(transform.position.x, transform.position.y + 5, -10);
         }
@@ -206,6 +206,14 @@ public class SpriteScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Rope"))
         {
             isGrounded = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Rope"))
+        {
+            isGrounded = false;
         }
     }
 }
