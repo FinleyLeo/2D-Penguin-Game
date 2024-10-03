@@ -9,8 +9,11 @@ public class SpriteScript : MonoBehaviour
 {
 
     private readonly float speed = 8;
-    private float jumpForce = 150;
+    private float jumpForce = 350;
     private readonly float maxSpeed = 30;
+
+    // declare this variable at the top of your HelperScript class
+    LayerMask groundLayerMask;
 
     public int coins;
     public int health;
@@ -45,6 +48,9 @@ public class SpriteScript : MonoBehaviour
 
         helper = gameObject.AddComponent<HelperScript>();
 
+        // set the mask to be "Ground"
+        groundLayerMask = LayerMask.GetMask("Ground");
+
         setactive = false;
         gameOver.SetActive(false);
         controls.SetActive(false);
@@ -56,6 +62,7 @@ public class SpriteScript : MonoBehaviour
         Move();
         Jump();
         CameraFollow();
+        DoRayCollisionCheck();
 
         if (Input.GetKeyDown(KeyCode.H))
         {
@@ -109,6 +116,10 @@ public class SpriteScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) == true && isGrounded)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
+
+        if (!isGrounded)
+        {
             animator.SetBool("Jumping", true);
         }
 
@@ -164,26 +175,6 @@ public class SpriteScript : MonoBehaviour
         sr.color = Color.white;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Enemy"))
-        {
-            isGrounded = true;
-            animator.SetBool("Jumping", false);
-            animator.SetBool("Falling", false);
-            animator.SetBool("HitGround", true);
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = false;
-            animator.SetBool("HitGround", false);
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Coin"))
@@ -215,5 +206,35 @@ public class SpriteScript : MonoBehaviour
         {
             isGrounded = false;
         }
+    }
+
+    public void DoRayCollisionCheck()
+    {
+        float rayLength = 0.5f; // length of raycast
+
+
+        //cast a ray downward 
+        RaycastHit2D hit;
+
+        hit = Physics2D.Raycast(transform.position, Vector2.down, rayLength, groundLayerMask);
+
+        Color hitColor = Color.white;
+        isGrounded = false;
+        animator.SetBool("HitGround", false);
+
+
+        if (hit.collider != null)
+        {
+            hitColor = Color.green;
+            isGrounded = true;
+            animator.SetBool("Falling", false);
+            animator.SetBool("HitGround", true);
+            animator.SetBool("Jumping", false);
+        }
+
+        // draw a debug ray to show ray position
+        // You need to enable gizmos in the editor to see these
+        Debug.DrawRay(transform.position, Vector2.down * rayLength, hitColor);
+
     }
 }

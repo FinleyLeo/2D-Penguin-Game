@@ -8,14 +8,13 @@ public class EnemyScript : MonoBehaviour
     private int maxHealth = 3;
     public int health;
 
-    public float coolDown;
     public float speed = 10;
+    public float coolDown = 0;
 
     private bool isGrounded;
     private bool isDead;
 
     private GameObject player;
-    private SpriteScript playerScript;
     private SpriteRenderer playerSr;
 
     private Rigidbody2D rb;
@@ -30,7 +29,6 @@ public class EnemyScript : MonoBehaviour
         anim = GetComponent<Animator>();
         player = GameObject.Find("Sprite");
         playerSr = player.GetComponent<SpriteRenderer>();
-        playerScript = player.GetComponent<SpriteScript>();
 
         health = maxHealth;
     }
@@ -38,7 +36,7 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        coolDown -= Time.deltaTime;
+        
     }
 
     public void EnemyMovement()
@@ -64,11 +62,6 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    public void Attack()
-    {
-        playerScript.TakeDamage(1);
-    }
-
     public void TakeDamage(int damage)
     {
         health -= damage;
@@ -92,13 +85,7 @@ public class EnemyScript : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && isGrounded && coolDown <= 0)
-        {
-            anim.SetTrigger("Attack");
-            coolDown = 1.5f;
-        }
-
-        else if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
         }
