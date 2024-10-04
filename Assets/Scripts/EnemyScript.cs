@@ -7,12 +7,20 @@ public class EnemyScript : MonoBehaviour
 {
     private int maxHealth = 3;
     public int health;
+    public int attackDamage = 1;
 
     public float speed = 10;
     public float coolDown = 0;
+    public float attackRange = 0.5f;
+    private float offset;
 
-    private bool isGrounded;
-    private bool isDead;
+    public bool isGrounded;
+    public bool isDead;
+
+    public Transform hitBox;
+
+    public LayerMask playerLayer;
+
 
     private GameObject player;
     private SpriteRenderer playerSr;
@@ -20,6 +28,7 @@ public class EnemyScript : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer sr;
     private Animator anim;
+    private EnemyAttack enemyAttack;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +36,8 @@ public class EnemyScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        enemyAttack = GetComponentInChildren<EnemyAttack>();
+
         player = GameObject.Find("Sprite");
         playerSr = player.GetComponent<SpriteRenderer>();
 
@@ -36,7 +47,7 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        hitBox.position = new Vector2(transform.position.x + offset, transform.position.y);
     }
 
     public void EnemyMovement()
@@ -47,12 +58,14 @@ public class EnemyScript : MonoBehaviour
             {
                 rb.velocity = new Vector2(1 * speed, rb.velocity.y);
                 sr.flipX = false;
+                offset = 2f;
             }
 
             else if (player.transform.position.x < transform.position.x)
             {
                 rb.velocity = new Vector2(-1 * speed, rb.velocity.y);
                 sr.flipX = true;
+                offset = -2f;
             }
 
             if (Mathf.Abs(rb.velocity.x) > 0)
@@ -60,6 +73,27 @@ public class EnemyScript : MonoBehaviour
                 anim.SetBool("Run", true);
             }
         }
+    }
+
+    void Hit()
+    {
+        Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(hitBox.position, attackRange, playerLayer);
+
+        foreach (Collider2D player in hitPlayer)
+        {
+            player.GetComponent<SpriteScript>().TakeDamage(attackDamage);
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+
+        if (hitBox == null)
+        {
+            return;
+        }
+
+        Gizmos.DrawWireSphere(hitBox.position, attackRange);
     }
 
     public void TakeDamage(int damage)

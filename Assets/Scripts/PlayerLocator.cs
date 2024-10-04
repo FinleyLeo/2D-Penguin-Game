@@ -7,11 +7,15 @@ public class PlayerLocator : MonoBehaviour
     private EnemyScript enemyScript;
     private Animator anim;
 
+    private Collider2D col;
+
     // Start is called before the first frame update
     void Start()
     {
         enemyScript = GetComponentInParent<EnemyScript>();
         anim = GetComponentInParent<Animator>();
+
+        col = gameObject.GetComponent<Collider2D>();
     }
 
     // Update is called once per frame
@@ -22,7 +26,7 @@ public class PlayerLocator : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && collision.IsTouching(col))
         {
             enemyScript.EnemyMovement();
         }

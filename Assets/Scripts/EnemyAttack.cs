@@ -1,70 +1,66 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    private SpriteScript script;
+    private EnemyScript enemyScript;
     private Animator anim;
 
     private GameObject player;
     private SpriteScript playerScript;
 
-    public Transform hitBox;
+    public float coolDown = 2;
 
-    public float attackRange = 0.5f;
-    public float coolDown = 0;
+    private Collider2D col;
 
-    private bool attackReady;
-
-    public LayerMask playerLayer;
-
-    public int attackDamage = 1;
+    private bool playerColl;
 
     private void Start()
     {
-        script = GetComponent<SpriteScript>();
-        anim = GetComponent<Animator>();
-
-        player = GameObject.Find("Sprite");   
+        player = GameObject.Find("Sprite");
         playerScript = player.GetComponent<SpriteScript>();
+
+        enemyScript = GetComponentInParent<EnemyScript>();
+        anim = GetComponentInParent<Animator>();
+
+        col = gameObject.GetComponent<Collider2D>();
+
+        coolDown = 2;
     }
 
     // Update is called once per frame
     void Update()
     {
-        coolDown = Time.deltaTime;
+        coolDown -= Time.deltaTime;
 
-        if (coolDown <= 0)
+        if (coolDown < 0 && playerColl && !enemyScript.isDead)
         {
-
+            Attack();
         }
-
     }
 
     void Attack()
     {
         anim.SetTrigger("Attack");
-
-        Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(hitBox.position, attackRange, playerLayer);
-
-        foreach (Collider2D player in hitPlayer)
-        {
-            player.GetComponent<SpriteScript>().TakeDamage(attackDamage);
-        }
-
-        coolDown = 0.25f;
+        coolDown = 2f;
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnTriggerStay2D(Collider2D collision)
     {
-
-        if (hitBox == null)
+        if (collision.gameObject.CompareTag("Player") && collision.IsTouching(col))
         {
-            return;
+            playerColl = true;
         }
+    }
 
-        Gizmos.DrawWireSphere(hitBox.position, attackRange);
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerColl = false;
+        }
     }
 }

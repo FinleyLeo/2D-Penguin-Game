@@ -192,22 +192,6 @@ public class SpriteScript : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Rope"))
-        {
-            isGrounded = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Rope"))
-        {
-            isGrounded = false;
-        }
-    }
-
     public void DoRayCollisionCheck()
     {
         float rayLength = 0.5f; // length of raycast
