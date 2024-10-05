@@ -9,7 +9,6 @@ public class PlayerAttack : MonoBehaviour
     private Animator anim;
 
     public GameObject enemy;
-    private Animator enemyAnim;
 
     public Transform hitBox;
 
@@ -24,8 +23,6 @@ public class PlayerAttack : MonoBehaviour
     {
         script = GetComponent<SpriteScript>();
         anim = GetComponent<Animator>();
-
-        enemyAnim = enemy.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -45,9 +42,12 @@ public class PlayerAttack : MonoBehaviour
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(hitBox.position, attackRange, enemyLayers);
 
-        foreach (Collider2D enemy in hitEnemies)
+        if (hitEnemies != null)
         {
-            enemy.GetComponent<EnemyScript>().TakeDamage(attackDamage);
+            foreach (Collider2D enemy in hitEnemies)
+            {
+                enemy.GetComponent<EnemyScript>().TakeDamage(attackDamage);
+            }
         }
 
         coolDown = 0.25f;

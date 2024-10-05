@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,8 +13,8 @@ public class SpriteScript : MonoBehaviour
     private float jumpForce = 350;
     private readonly float maxSpeed = 30;
 
-    // declare this variable at the top of your HelperScript class
     LayerMask groundLayerMask;
+    LayerMask wallLayerMask;
 
     public int coins;
     public int health;
@@ -50,6 +51,7 @@ public class SpriteScript : MonoBehaviour
 
         // set the mask to be "Ground"
         groundLayerMask = LayerMask.GetMask("Ground");
+        wallLayerMask = LayerMask.GetMask("Wall") | LayerMask.GetMask("Ground");
 
         setactive = false;
         gameOver.SetActive(false);
@@ -190,6 +192,24 @@ public class SpriteScript : MonoBehaviour
             Instantiate(splash, transform.position, splash.transform.rotation);
             isGrounded = true;
         }
+
+        if (collision.gameObject.CompareTag("Rope"))
+        {
+            rb.velocity = new Vector2(0, 0);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Rope"))
+        {
+            rb.velocity = new Vector2(rb.velocity.x, -5);
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 10);
+            }
+        }
     }
 
     public void DoRayCollisionCheck()
@@ -198,27 +218,47 @@ public class SpriteScript : MonoBehaviour
 
 
         //cast a ray downward 
-        RaycastHit2D hit;
+        RaycastHit2D groundCheck;
+        RaycastHit2D wallCheckL;
+        RaycastHit2D wallCheckR;
 
-        hit = Physics2D.Raycast(transform.position, Vector2.down, rayLength, groundLayerMask);
+        groundCheck = Physics2D.Raycast(transform.position, Vector2.down, rayLength, groundLayerMask);
+        wallCheckL = Physics2D.Raycast(new Vector2(transform.position.x - 0.75f, transform.position.y + 1), Vector2.left, rayLength, wallLayerMask);
+        wallCheckR = Physics2D.Raycast(new Vector2(transform.position.x + 0.75f, transform.position.y + 1), Vector2.right, rayLength, wallLayerMask);
 
-        Color hitColor = Color.white;
+        Color hitColorG = Color.white;
+        Color hitColorL = Color.white;
+        Color hitColorR = Color.white;
+
         isGrounded = false;
         animator.SetBool("HitGround", false);
 
 
-        if (hit.collider != null)
+        if (groundCheck.collider != null)
         {
-            hitColor = Color.green;
+            hitColorG = Color.green;
             isGrounded = true;
             animator.SetBool("Falling", false);
             animator.SetBool("HitGround", true);
             animator.SetBool("Jumping", false);
         }
 
+        if (wallCheckL.collider != null && Input.GetKey("a"))
+        {
+            hitColorL = Color.green;
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        }
+
+        if (wallCheckR.collider != null && Input.GetKey("d"))
+        {
+            hitColorR = Color.green;
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        }
+
         // draw a debug ray to show ray position
         // You need to enable gizmos in the editor to see these
-        Debug.DrawRay(transform.position, Vector2.down * rayLength, hitColor);
-
+        Debug.DrawRay(transform.position, Vector2.down * rayLength, hitColorG);
+        Debug.DrawRay(new Vector2(transform.position.x - 0.75f, transform.position.y + 1), Vector2.left * rayLength, hitColorL);
+        Debug.DrawRay(new Vector2(transform.position.x + 0.75f, transform.position.y + 1), Vector2.right * rayLength, hitColorR);
     }
 }
