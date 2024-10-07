@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerLocator : MonoBehaviour
 {
     private EnemyScript enemyScript;
+    private EnemyMovement enemyMove;
     private Animator anim;
 
     private Collider2D col;
@@ -13,6 +14,7 @@ public class PlayerLocator : MonoBehaviour
     void Start()
     {
         enemyScript = GetComponentInParent<EnemyScript>();
+        enemyMove = GetComponentInParent<EnemyMovement>();
         anim = GetComponentInParent<Animator>();
 
         col = gameObject.GetComponent<Collider2D>();
@@ -28,7 +30,7 @@ public class PlayerLocator : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && collision.IsTouching(col))
         {
-            enemyScript.EnemyMovement();
+            enemyMove.EnemyMove();
         }
     }
 

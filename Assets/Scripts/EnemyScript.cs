@@ -5,14 +5,13 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    private int maxHealth = 3;
     public int health;
     public int attackDamage = 1;
 
-    public float speed = 10;
     public float coolDown = 0;
     public float attackRange = 0.5f;
-    private float offset;
+    public float Xoffset;
+    public float Yoffset;
 
     public bool isGrounded;
     public bool isDead;
@@ -40,39 +39,22 @@ public class EnemyScript : MonoBehaviour
 
         player = GameObject.Find("Sprite");
         playerSr = player.GetComponent<SpriteRenderer>();
-
-        health = maxHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        hitBox.position = new Vector2(transform.position.x + offset, transform.position.y);
-    }
-
-    public void EnemyMovement()
-    {
-        if (!isDead)
+        if (sr.flipX == true)
         {
-            if (player.transform.position.x > transform.position.x)
-            {
-                rb.velocity = new Vector2(1 * speed, rb.velocity.y);
-                sr.flipX = false;
-                offset = 2f;
-            }
-
-            else if (player.transform.position.x < transform.position.x)
-            {
-                rb.velocity = new Vector2(-1 * speed, rb.velocity.y);
-                sr.flipX = true;
-                offset = -2f;
-            }
-
-            if (Mathf.Abs(rb.velocity.x) > 0)
-            {
-                anim.SetBool("Run", true);
-            }
+            Xoffset = Mathf.Abs(Xoffset) * -1;
         }
+
+        else if (sr.flipX == false)
+        {
+            Xoffset = Mathf.Abs(Xoffset);
+        }
+
+        hitBox.position = new Vector2(transform.position.x + Xoffset, transform.position.y + Yoffset);
     }
 
     void Hit()
@@ -98,6 +80,7 @@ public class EnemyScript : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        anim.SetTrigger("Hit");
         health -= damage;
 
         if (health <= 0)
